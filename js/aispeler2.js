@@ -48,8 +48,8 @@ function selectai2acard() {
 function playoutGame(gameCopy, gameHand) {
 	var totalpoints = 0;
 	while (gameCopy.isGameValid()) {
-		var firstSuit = speler2.getFirstSuit(gameCopy.currentRound);
-		var range = speler2.getSuitRange(firstSuit, gameHand);
+		var firstSuit2 = speler2.getFirstSuit(gameCopy.currentRound);
+		var range = speler2.getSuitRange(firstSuit2, gameHand);
 		if (range[0] === -1 && range[1] === -1) {
 			var index = Math.floor(Math.random() * gameHand.length);
 			while (gameCopy.firstInRound() && !gameCopy.hasHeartsBroken && gameHand[index].suit === 1 && !Hearts.hasAllHearts(gameHand)) {
