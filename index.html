@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="js/sweetalert.min.js"></script>
+    <script type="text/javascript" src="js/sinon-1.17.2.js"></script>
+    <title>Hearts</title>
+    <link href="css/hearts.css" rel="stylesheet">
+    <link href="css/sweetalert.css" rel="stylesheet">
+  </head>
+  <body>
+	<div id="container">
+		<button id="pass_button" class="button">Pass</button>
+		<button id="accept_button" class="button">Accept</button>
+		<button id="playcard_button" class="button">Play</button>
+		<table id="speler1">
+		<tr>
+		<td></td>
+		<td class="name" id="name1">Human</td>
+		<td class="score" id="score1">0</td>
+		</tr>
+		</table>
+		<table id="speler2">
+		<tr>
+		<td><img src="speler2.png"/></td>
+		<td class="name" id="name2">Speler2</td>
+		<td class="score" id="score2">0</td>
+		</tr>
+		</table>
+		<table id="speler3">
+		<tr>
+		<td><img src="speler3.png"/></td>
+		<td class="name" id="name3">Speler3</td>
+		<td class="score" id="score3">0</td>
+		</tr>
+		</table>
+		<table id="speler4">
+		<tr>
+		<td><img src="speler4.png"/></td>
+		<td class="name" id="name4">Speler4</td>
+		<td class="score" id="score4">0</td>
+		</tr>
+		</table>
+	</div>
+	<div id="topbar"></div>
+	<script src="js/speler1.js"></script>
+	<script src="js/aispeler2.js"></script>
+	<script src="js/aispeler3.js"></script>
+	<script src="js/aispeler4.js"></script>
+	<script src="js/heartsdeck.js"></script>
+	<script src="hearts.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function () {
+			setTimeout(function () {
+				$("#heartsbutton").trigger('click');
+				$("#heartsbutton").prop('disabled', true);
+			}, 2000);
+			sourceplayer = 1;
+			targetplayer = 4;
+			$("#pass_button").hide();
+			$("#accept_button").hide();
+			$("#playcard_button").hide();
+			$("#btn_id2").hide();
+			$("#btn_id3").hide();
+			$("#btn_id4").hide();
+			$("#pass_button").click(function() {
+				Hearts.doPass(sourceplayer, targetplayer);
+			});
+			$("#accept_button").click(function() {
+				Hearts.doAccept();
+			});
+			$("#playcard_button").click(function() {
+				$("#playcard_button").hide();
+				var spelers = ronde.playerOrder;
+				for (var i = 0; i < spelers.length; i++) {
+					switch (i) {
+						case 0:	if (speler1.selectedcard !== null) {
+								Hearts.playCard(1);
+								var gameCopy = ronde.gameCopy(0);
+								nextplayer = ronde.playerOrder[1].index;
+							}
+							break;
+						case 1: if (speler4.selectedcard === null) {
+								var gameCopy = ronde.gameCopy(1);
+								speler4.selectedcard = speler4.cards[selectai4card(gameCopy)];
+								Hearts.playCard(4);
+							}
+							break;
+						case 2: if (speler3.selectedcard === null) {
+								var gameCopy = ronde.gameCopy(2);
+								speler3.selectedcard = speler3.cards[selectai3card(gameCopy)];
+								Hearts.playCard(3);
+							}
+							break;
+						case 3: if (speler2.selectedcard === null) {
+								var gameCopy = ronde.gameCopy(3);
+								speler2.selectedcard = speler2.cards[selectai2card(gameCopy)];
+								Hearts.playCard(2);
+							}
+							break;
+					}
+				}
+			});
+			$("#btn_id2").click(function() {
+				var spelers = ronde.playerOrder;
+				for (var i = 0; i < spelers.length; i++) {
+					switch (i) {
+						case 3: if (speler2.selectedcard === null) {
+								var gameCopy = ronde.gameCopy(3);
+								speler2.selectedcard = speler2.cards[selectai2card(gameCopy)];
+								Hearts.playCard(2);
+							}
+							else {
+								Hearts.playCard(2);
+							}
+							nextplayer = ronde.playerOrder[0].index;
+							break;
+						default:break;
+					}
+				}
+			});
+			$("#btn_id3").click(function() {
+				var spelers = ronde.playerOrder;
+				for (var i = 0; i < spelers.length; i++) {
+					switch (i) {
+						case 2: if (speler3.selectedcard === null) {
+								var gameCopy = ronde.gameCopy(2);
+								speler3.selectedcard = speler3.cards[selectai3card(gameCopy)];
+								Hearts.playCard(3);
+							}
+							else {
+								Hearts.playCard(3);
+							}
+							break;
+						default:break;
+					}
+				}
+			});
+			$("#btn_id4").click(function() {
+				var spelers = ronde.playerOrder;
+				for (var i = 0; i < spelers.length; i++) {
+					switch (i) {
+						case 1:	if (speler4.selectedcard === null) {
+								var gameCopy = ronde.gameCopy(1);
+								speler4.selectedcard = speler4.cards[selectai4card(gameCopy)];
+								Hearts.playCard(4);
+							}
+							else {
+								Hearts.playCard(4);
+							}
+							break;
+						default:break;
+					}
+				}
+			});
+		});
+	</script>
+  </body>
+</html>
