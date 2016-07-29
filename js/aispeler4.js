@@ -233,6 +233,10 @@ function selectai4card(mastercopy) {
 			else firstSuit = hand4.charAt(Math.floor(Math.random() * maximum) * 2);
 		}
 		else firstSuit = hand4.charAt(Math.floor(Math.random() * maximum) * 2);
+	}
+	bestIndex = runMCTS(mastercopy);
+	if (mastercopy.currentRound.length === 0 && !(currenthand === 0)) {
+		firstSuit = suitsymbols[speler4.cards[bestIndex].suit];
 		var suitcount = 0;
 		var hasallhearts = Hearts.hasAllHearts(speler1.cards);
 		for (var j = speler1.cards.length - 1; j >= 0; j--) {
@@ -258,10 +262,7 @@ function selectai4card(mastercopy) {
 				$("#" + strid).addClass('movable');
 			}
 		}
-	}
-	bestIndex = runMCTS(mastercopy);
-	if (mastercopy.currentRound.length === 0 && !(currenthand === 0)) {
-		firstSuit = suitsymbols[speler4.cards[bestIndex].suit];
+
 	}
 //	console.log("Speler4select:" + firstSuit + " current hand:" + currenthand + " bestIndex:" + bestIndex + Hearts.cardtosymbols(speler4.cards[bestIndex]));
 	return bestIndex;
