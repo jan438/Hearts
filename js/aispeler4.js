@@ -215,25 +215,6 @@ function selectai4card(mastercopy) {
 		hand4 = hand4.substring(0, queenofspades) + hand4.substring(queenofspades + 2, hand4.length);
 	}
 	speler4.playoutHand = speler4.cards.slice();
-	if (mastercopy.currentRound.length === 0 && !(currenthand === 0)) {
-		var maximum = speler4.cards.length;
-		if (!ronde.hasHeartsBroken) {
-			if (!hasOtherCards) {
-				firstSuit = "♥";
-				ronde.hasHeartsBroken = true;
-			}
-		}
-		if (hasOtherCards && firstSuit !== "♥") {
-			var firstindex = hand4.indexOf("♥");
-			var lastindex = hand4.lastIndexOf("♥");
-			if (firstindex >= 0) {
-				var temphand = hand4.substring(0, firstindex) + hand4.substring(lastindex + 2, hand4.length);
-				firstSuit = temphand.charAt(Math.floor(Math.random() * temphand.length / 2) * 2);
-			}
-			else firstSuit = hand4.charAt(Math.floor(Math.random() * maximum) * 2);
-		}
-		else firstSuit = hand4.charAt(Math.floor(Math.random() * maximum) * 2);
-	}
 	bestIndex = runMCTS(mastercopy);
 	if (mastercopy.currentRound.length === 0 && !(currenthand === 0)) {
 		firstSuit = suitsymbols[speler4.cards[bestIndex].suit];
@@ -262,7 +243,6 @@ function selectai4card(mastercopy) {
 				$("#" + strid).addClass('movable');
 			}
 		}
-
 	}
 //	console.log("Speler4select:" + firstSuit + " current hand:" + currenthand + " bestIndex:" + bestIndex + Hearts.cardtosymbols(speler4.cards[bestIndex]));
 	return bestIndex;
