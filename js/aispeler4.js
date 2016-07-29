@@ -260,6 +260,9 @@ function selectai4card(mastercopy) {
 		}
 	}
 	bestIndex = runMCTS(mastercopy);
+	if (mastercopy.currentRound.length === 0 && !(currenthand === 0)) {
+		firstSuit = suitsymbols[speler4.cards[bestIndex].suit];
+	}
 //	console.log("Speler4select:" + firstSuit + " current hand:" + currenthand + " bestIndex:" + bestIndex + Hearts.cardtosymbols(speler4.cards[bestIndex]));
 	return bestIndex;
 }
