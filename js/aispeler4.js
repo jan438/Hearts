@@ -82,10 +82,11 @@ function runMCTS(origState) {
 function treePolicy(roNode) {
 	var thisNode = roNode;
 	while (thisNode.state.isGameValid() && expansionDepth > thisNode.depth && thisNode.currentHand.length > 0) {
-		var range = speler4.getSuitRange(firstSuit, thisNode.currentHand);
+		var firstSuit2 = speler4.getFirstSuit(thisNode.state.currentRound); 
+		var range = speler4.getSuitRange(firstSuit2, thisNode.currentHand);
 		var firstIndex = range[0];
 		var lastIndex = range[1];
-		if (firstSuit === " ") {
+		if (firstSuit2 === " ") {
 			if (thisNode.state.hasHeartsBroken || Hearts.hasAllHearts(thisNode.currentHand)) {
 				firstIndex = 0;
 				lastIndex = thisNode.currentHand.length;
