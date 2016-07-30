@@ -81,6 +81,7 @@ function runMCTS(origState) {
 }
 function treePolicy(roNode) {
 	var thisNode = roNode;
+	thisNode.currentHand = speler4.playoutHand.slice();
 	while (thisNode.state.isGameValid() && expansionDepth > thisNode.depth && thisNode.currentHand.length > 0) {
 		var firstSuit2 = speler4.getFirstSuit(thisNode.state.currentRound); 
 		var range = speler4.getSuitRange(firstSuit2, thisNode.currentHand);
