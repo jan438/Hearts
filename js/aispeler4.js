@@ -98,8 +98,12 @@ function treePolicy(roNode) {
 					lastIndex = thisNode.currentHand.length;
 				}
 				else {
+					var starthand = thisNode.currentHand.slice(0, heartsRange[0]);
+					var endhand = thisNode.currentHand.slice(heartsRange[1], thisNode.currentHand.length);
+					thisNode.currentHand = starthand.concat(endhand);
 					firstIndex = 0;
-					lastIndex = heartsRange[0];
+					lastIndex = thisNode.currentHand.length;
+//					lastIndex = heartsRange[0];
 				}
 			}
 		}
