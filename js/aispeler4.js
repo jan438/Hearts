@@ -93,7 +93,7 @@ function treePolicy(roNode) {
 			}
 			else {
 				var heartsRange = speler4.getSuitRange("♥", thisNode.currentHand);
-				if (heartsRange.startIndex === -1) {
+				if (heartsRange[0] === -1) {
 					firstIndex = 0;
 					lastIndex = thisNode.currentHand.length;
 				}
