@@ -21,9 +21,14 @@ function play1card(card) {
 	playedcards = playedcards + 1;
 }
 function select1card() {
+	var hand1 = Hearts.cardstosymbols(speler1.cards);
+	var twoofclubs = hand1.indexOf("♣2");
+	if (twoofclubs >= 0) {
+		ronde.currentplayer = 1;
+	}
 	for (var j = 0; j <= 12; j++) {
 		strid = speler1.cards[j].$el.id;
-		if (speler1.cards[j].suit === 2) {
+		if (speler1.cards[j].suit === 0) {
 			$("#" + strid).addClass('movable');
 			if (speler1.cards[j].rank === 2) {
 				ronde.currentplayer = 1;
