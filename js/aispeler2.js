@@ -52,7 +52,7 @@ function playoutGame(gameCopy, gameHand) {
 		var range = speler2.getSuitRange(firstSuit2, gameHand);
 		if (range[0] === -1 && range[1] === -1) {
 			var index = Math.floor(Math.random() * gameHand.length);
-			while (gameCopy.firstInRound() && !gameCopy.hasHeartsBroken && gameHand[index].suit === 1 && !Hearts.hasAllHearts(gameHand)) {
+			while (gameCopy.firstInRound() && !gameCopy.hasHeartsBroken && gameHand[index].suit === 3 && !Hearts.hasAllHearts(gameHand)) {
 				index = Math.floor(Math.random() * gameHand.length);
 			}
 			var removedcard = gameHand.splice(index, 1);
@@ -115,13 +115,13 @@ function selectai2card(mastercopy) {
 			if (suitcount > 0) {
 				for (var j = speler1.cards.length - 1; j >= 0; j--) {
 					strid = speler1.cards[j].$el.id;
-					if (!(!ronde.hasHeartsBroken && speler1.cards[j].suit === 1) && (speler1.cards[j].suit === suitsymbols.indexOf(firstSuit))) $("#" + strid).addClass('movable');
+					if (!(!ronde.hasHeartsBroken && speler1.cards[j].suit === 3) && (speler1.cards[j].suit === suitsymbols.indexOf(firstSuit))) $("#" + strid).addClass('movable');
 				}
 			}
 			else {
 				for (var j = speler1.cards.length - 1; j >= 0; j--) {
 					strid = speler1.cards[j].$el.id;
-					if (!(!ronde.hasHeartsBroken && speler1.cards[j].suit === 1)) $("#" + strid).addClass('movable');
+					if (!(!ronde.hasHeartsBroken && speler1.cards[j].suit === 3)) $("#" + strid).addClass('movable');
 				}
 			}
 		}
@@ -144,9 +144,9 @@ function selectai2card(mastercopy) {
 //		console.log("Cards2 in the suit:" + Hearts.cardstosymbols(rangecards));
 		for (var i = 0; i < rangecards.length; i++) {
 			var gameHand = speler2.cards.slice();
-			if (mastercopy.firstInRound() && !mastercopy.hasHeartsBroken && gameHand[i].suit === 1)
+			if (mastercopy.firstInRound() && !mastercopy.hasHeartsBroken && gameHand[i].suit === 3)
 				break;
-			if (currenthand === 0 && gameHand[i].suit === 0 && gameHand[i].rank === 12)
+			if (currenthand === 0 && gameHand[i].suit === 2 && gameHand[i].rank === 12)
 				break;
 			var gameCopy = new Hearts.state2(mastercopy);
 			gameCopy.cardsPlayed.allCards = aicardsplayed.slice();
@@ -165,9 +165,9 @@ function selectai2card(mastercopy) {
 	else {
 		for (var i = 0; i <= speler2.playoutHand.length - 1; i++) {
 			var gameHand = speler2.cards.slice();
-			if (mastercopy.firstInRound() && !mastercopy.hasHeartsBroken && gameHand[i].suit === 1)
+			if (mastercopy.firstInRound() && !mastercopy.hasHeartsBroken && gameHand[i].suit === 3)
 				break;
-			if (currenthand === 0 && gameHand[i].suit === 0 && gameHand[i].rank === 12)
+			if (currenthand === 0 && gameHand[i].suit === 2 && gameHand[i].rank === 12)
 				break;
 			var gameCopy = new Hearts.state2(mastercopy);
 			gameCopy.cardsPlayed.allCards = aicardsplayed.slice();

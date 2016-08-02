@@ -84,13 +84,13 @@ function selectai3card(mastercopy) {
 			if (suitcount > 0) {
 				for (var j = speler1.cards.length - 1; j >= 0; j--) {
 					strid = speler1.cards[j].$el.id;
-					if (!(!ronde.hasHeartsBroken && speler1.cards[j].suit === 1) && (speler1.cards[j].suit === suitsymbols.indexOf(firstSuit))) $("#" + strid).addClass('movable');
+					if (!(!ronde.hasHeartsBroken && speler1.cards[j].suit === 3) && (speler1.cards[j].suit === suitsymbols.indexOf(firstSuit))) $("#" + strid).addClass('movable');
 				}
 			}
 			else {
 				for (var j = speler1.cards.length - 1; j >= 0; j--) {
 					strid = speler1.cards[j].$el.id;
-					if (!(!ronde.hasHeartsBroken && speler1.cards[j].suit === 1)) $("#" + strid).addClass('movable');
+					if (!(!ronde.hasHeartsBroken && speler1.cards[j].suit === 3)) $("#" + strid).addClass('movable');
 				}
 			}
 		}

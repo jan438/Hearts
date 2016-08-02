@@ -1,8 +1,8 @@
 function play1card(card) {
-	if (!ronde.twoClubsPlayed && speler1.selectedcard.rank === 2 && speler1.selectedcard.suit === 2) {
+	if (!ronde.twoClubsPlayed && speler1.selectedcard.rank === 2 && speler1.selectedcard.suit === 0) {
 		ronde.twoClubsPlayed = true;
 	}
-	if (!ronde.hasHeartsBroken && ronde.currentplayer === 1 && speler1.selectedcard.suit === 1) {
+	if (!ronde.hasHeartsBroken && ronde.currentplayer === 1 && speler1.selectedcard.suit === 3) {
 		ronde.hasHeartsBroken = true;
 	}
 	endxposition = 0;

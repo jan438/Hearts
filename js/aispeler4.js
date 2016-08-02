@@ -99,12 +99,8 @@ function treePolicy(roNode) {
 					lastIndex = thisNode.currentHand.length;
 				}
 				else {
-					var starthand = thisNode.currentHand.slice(0, heartsRange[0]);
-					var endhand = thisNode.currentHand.slice(heartsRange[1], thisNode.currentHand.length);
-					thisNode.currentHand = starthand.concat(endhand);
 					firstIndex = 0;
-					lastIndex = thisNode.currentHand.length;
-//					lastIndex = heartsRange[0];
+					lastIndex = heartsRange[0];
 				}
 			}
 		}
@@ -233,13 +229,13 @@ function selectai4card(mastercopy) {
 			if (suitcount > 0) {
 				for (var j = speler1.cards.length - 1; j >= 0; j--) {
 					strid = speler1.cards[j].$el.id;
-					if (!(!ronde.hasHeartsBroken && speler1.cards[j].suit === 1) && (speler1.cards[j].suit === suitsymbols.indexOf(firstSuit))) $("#" + strid).addClass('movable');
+					if (!(!ronde.hasHeartsBroken && speler1.cards[j].suit === 3) && (speler1.cards[j].suit === suitsymbols.indexOf(firstSuit))) $("#" + strid).addClass('movable');
 				}
 			}
 			else {
 				for (var j = speler1.cards.length - 1; j >= 0; j--) {
 					strid = speler1.cards[j].$el.id;
-					if (!(!ronde.hasHeartsBroken && speler1.cards[j].suit === 1)) $("#" + strid).addClass('movable');
+					if (!(!ronde.hasHeartsBroken && speler1.cards[j].suit === 3)) $("#" + strid).addClass('movable');
 				}
 			}
 		}

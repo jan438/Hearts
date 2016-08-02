@@ -40,7 +40,7 @@ handy[0] = 275;
 handy[1] = -137;
 handy[2] = -275;
 handy[3] = -137;
-var suitsymbols = "♠♥♣♦";
+var suitsymbols = "♣♦♠♥";
 var othercards = "♠♣♦";
 var ranksymbols = "234567890BVHA";
 var firstSuit;
@@ -50,13 +50,13 @@ Hearts.cardstosymbols = function (cards) {
 		var symbol1 = "";
 		var symbol2 = "";
 		switch (cards[i].suit) {
-			case 0: symbol1 = "♠";
+			case 0: symbol1 = "♣";
 				break;
-			case 1: symbol1 = "♥";
+			case 1: symbol1 = "♦";
 				break;
-			case 2: symbol1 = "♣";
+			case 2: symbol1 = "♠";
 				break;
-			case 3: symbol1 = "♦";
+			case 3: symbol1 = "♥";
 				break;
 		}
 		switch (cards[i].rank) {
@@ -96,13 +96,13 @@ Hearts.cardtosymbols = function (card) {
 	var symbol1 = "";
 	var symbol2 = "";
 	switch (card.suit) {
-		case 0: symbol1 = "♠";
+		case 0: symbol1 = "♣";
 			break;
-		case 1: symbol1 = "♥";
+		case 1: symbol1 = "♦";
 			break;
-		case 2: symbol1 = "♣";
+		case 2: symbol1 = "♠";
 			break;
-		case 3: symbol1 = "♦";
+		case 3: symbol1 = "♥";
 			break;
 	}
 	switch (card.rank) {
@@ -194,7 +194,18 @@ Hearts.comparecards = function (card1, card2) {
 		result = rank1 > rank2;
 	}
 	else {
-		result = suit1 > suit2;
+		switch (suit1) {
+			case 0: result = false;
+				break;
+			case 1: if (suit2 === 0) result = true;
+				else result = false;
+				break;
+			case 2: if (suit2 === 0 || suit2 === 1) result = true;
+				else result = false;
+				break;
+			case 3: result = true;
+				break;
+		}
 	}
 	return result;
 }
@@ -356,7 +367,7 @@ Hearts.state2 = function (secondCopy) {
 	this.hasAllHearts = function(hand) {
 		var flag = true;
 		for (var i = 0; i < hand.length; i++) {
-			if (hand[i].suit !== 1) {
+			if (hand[i].suit !== 3) {
 				flag = false;
 				break;
 			}
@@ -369,7 +380,7 @@ Hearts.state2 = function (secondCopy) {
 			return false;
 		}
 		if (this.firstInRound()) {
-			if (card.suit === 1 && !this.hasHeartsBroken && !this.hasAllHearts(playoutHand)) {
+			if (card.suit === 3 && !this.hasHeartsBroken && !this.hasAllHearts(playoutHand)) {
 				return false;
 			}
 			return true;
@@ -387,7 +398,7 @@ Hearts.state2 = function (secondCopy) {
 					return false;
 				}
 			}
-			if (card.suit === 1) {
+			if (card.suit === 3) {
 				this.hasHeartsBroken = true;
 			}
 		}
@@ -424,8 +435,8 @@ Hearts.state2 = function (secondCopy) {
 		var points = 0;
 		for (var i = 0; i < this.currentRound.length; i++) {
 			var card = this.currentRound[i];
-			if (card.suit === 1) points = points + 1;
-			if (card.rank === 12 && card.suit === 0) points = points + 13;
+			if (card.suit === 3) points = points + 1;
+			if (card.rank === 12 && card.suit === 2) points = points + 13;
 		}
 		return points;
 	}
@@ -450,7 +461,7 @@ Hearts.state2 = function (secondCopy) {
 Hearts.hasAllHearts = function (hand) {
 	var flag = true;
 	for (var i = 0; i < hand.length; i++) {
-		if (hand[i].suit !== 1) {
+		if (hand[i].suit !== 3) {
 			flag = false;
 			break;
 		}
@@ -596,14 +607,14 @@ Hearts.determineWinnerPlayer = function () {
 	if (rank3 === 1) rank3 = 14;
 	if (rank4 === 1) rank4 = 14;
 	var points = 0;
-	if (speler1.selectedcard.suit === 1) points = points + 1;
-	if (speler2.selectedcard.suit === 1) points = points + 1;
-	if (speler3.selectedcard.suit === 1) points = points + 1;
-	if (speler4.selectedcard.suit === 1) points = points + 1;
-	if (speler1.selectedcard.suit === 0 && rank1 === 12) points = points + 13;
-	if (speler2.selectedcard.suit === 0 && rank2 === 12) points = points + 13;
-	if (speler3.selectedcard.suit === 0 && rank3 === 12) points = points + 13;
-	if (speler4.selectedcard.suit === 0 && rank4 === 12) points = points + 13;
+	if (speler1.selectedcard.suit === 3) points = points + 1;
+	if (speler2.selectedcard.suit === 3) points = points + 1;
+	if (speler3.selectedcard.suit === 3) points = points + 1;
+	if (speler4.selectedcard.suit === 3) points = points + 1;
+	if (speler1.selectedcard.suit === 2 && rank1 === 12) points = points + 13;
+	if (speler2.selectedcard.suit === 2 && rank2 === 12) points = points + 13;
+	if (speler3.selectedcard.suit === 2 && rank3 === 12) points = points + 13;
+	if (speler4.selectedcard.suit === 2 && rank4 === 12) points = points + 13;
 	switch (ronde.currentplayer) {
 		case 1: highestcard = rank1;
 			winnerplayer = 1;
@@ -659,7 +670,7 @@ Hearts.determineWinnerPlayer = function () {
 			if (!hasallhearts) {
 				for (var j = speler1.cards.length - 1; j >= 0; j--) {
 					strid = speler1.cards[j].$el.id;
-					if (!(!ronde.hasHeartsBroken && speler1.cards[j].suit === 1)) $("#" + strid).addClass('movable');
+					if (!(!ronde.hasHeartsBroken && speler1.cards[j].suit === 3)) $("#" + strid).addClass('movable');
 				}
 			}
 			else {
@@ -1489,7 +1500,7 @@ var Deck = (function () {
 						}
 					}
 					if (!ronde.twoClubsPlayed && currenthand === 0 && ronde.currentplayer === 1) {
-						if (!(self.rank === 2 && self.suit === 2)) {
+						if (!(self.rank === 2 && self.suit === 0)) {
 							swal({
 								title: "<h4 id='swal2ofClubs'>You must play 2 of clubs!</h4>",
 								imageUrl: "Cards.png",
@@ -1516,7 +1527,7 @@ var Deck = (function () {
 							}
 						}
 						else {
-							if (!ronde.hasHeartsBroken && maxcardstoselect === 1 && self.suit === 1 && ronde.currentplayer === 1 && !onlyhearts) {
+							if (!ronde.hasHeartsBroken && maxcardstoselect === 1 && self.suit === 3 && ronde.currentplayer === 1 && !onlyhearts) {
 								swal({
 									title: "<h4 id='swalheartsbroken'>You must not play a card of hearts as first!</h4>",
 									imageUrl: "Cards.png",
@@ -1527,7 +1538,7 @@ var Deck = (function () {
 								validcard = false;
 							}
 							else {
-								if (currenthand === 0 && maxcardstoselect === 1 && self.suit === 0 && self.rank === 12) {
+								if (currenthand === 0 && maxcardstoselect === 1 && self.suit === 2 && self.rank === 12) {
 									swal({
 										title: "<h4 id='swalqueenofspades'>You must not play queen of spades in the first hand!</h4>",
 										imageUrl: "Cards.png",
@@ -1558,13 +1569,13 @@ var Deck = (function () {
 						});
 						if (firstSuit === " ") {
 							switch (self.suit) {
-								case 0: firstSuit = "♠";
+								case 0: firstSuit = "♣";
 									break;
-								case 1: firstSuit = "♥";
+								case 1: firstSuit = "♦";
 									break;
-								case 2: firstSuit = "♣";
+								case 2: firstSuit = "♠";
 									break;
-								case 3: firstSuit = "♦";
+								case 3: firstSuit = "♥";
 									break;
 							}
 						}
@@ -1659,7 +1670,7 @@ var Deck = (function () {
     }
   }
   function SuitName(suit) {
-    return suit === 0 ? 'spades' : suit === 1 ? 'hearts' : suit === 2 ? 'clubs' : suit === 3 ? 'diamonds' : 'joker';
+    return suit === 0 ? 'clubs' : suit === 1 ? 'diamonds' : suit === 2 ? 'spades' : suit === 3 ? 'hearts' : 'joker';
   }
   function addListener(target, name, listener) {
     target.addEventListener(name, listener);
