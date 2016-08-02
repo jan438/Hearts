@@ -149,10 +149,10 @@ function selectai2card(mastercopy) {
 			if (currenthand === 0 && gameHand[i].suit === 2 && gameHand[i].rank === 12)
 				break;
 			var gameCopy = new Hearts.state2(mastercopy);
-			gameCopy.cardsPlayed.allCards = aicardsplayed.slice();
-			gameCopy.cardsPlayed.invertDeck = aiinvertdeck.slice();
-			gameCopy.currentRound = aicurrentround.slice();
-			gameCopy.playerScores = aiplayerscores.slice();
+			gameCopy.cardsPlayed.allCards = aicardsplayed;
+			gameCopy.cardsPlayed.invertDeck = aiinvertdeck;
+			gameCopy.currentRound = aicurrentround;
+			gameCopy.playerScores = aiplayerscores;
 			var removedcard = gameHand.splice(i, 1);
 			var score = gameCopy.advance(removedcard[0], gameHand, 2);
 			score = score + playoutGame(gameCopy, gameHand);
@@ -170,10 +170,10 @@ function selectai2card(mastercopy) {
 			if (currenthand === 0 && gameHand[i].suit === 2 && gameHand[i].rank === 12)
 				break;
 			var gameCopy = new Hearts.state2(mastercopy);
-			gameCopy.cardsPlayed.allCards = aicardsplayed.slice();
-			gameCopy.cardsPlayed.invertDeck = aiinvertdeck.slice();
-			gameCopy.currentRound = aicurrentround.slice();
-			gameCopy.playerScores = aiplayerscores.slice();
+			gameCopy.cardsPlayed.allCards = aicardsplayed;
+			gameCopy.cardsPlayed.invertDeck = aiinvertdeck;
+			gameCopy.currentRound = aicurrentround;
+			gameCopy.playerScores = aiplayerscores;
 			var removedcard = gameHand.splice(i, 1);
 			var score = gameCopy.advance(removedcard[0], gameHand, 2);
 			score = score + playoutGame(gameCopy, gameHand);
