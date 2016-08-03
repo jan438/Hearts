@@ -194,18 +194,7 @@ Hearts.comparecards = function (card1, card2) {
 		result = rank1 > rank2;
 	}
 	else {
-		switch (suit1) {
-			case 0: result = false;
-				break;
-			case 1: if (suit2 === 0) result = true;
-				else result = false;
-				break;
-			case 2: if (suit2 === 0 || suit2 === 1) result = true;
-				else result = false;
-				break;
-			case 3: result = true;
-				break;
-		}
+		result = suit1 > suit2;
 	}
 	return result;
 }
