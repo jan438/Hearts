@@ -64,14 +64,12 @@ function runMCTS(origState) {
 	var aiallplayed = origState.cardsPlayed.allCards.slice();
 	var aiallinvert = origState.cardsPlayed.invertDeck.slice();
 	var aicurrentround = origState.currentRound.slice();
-	var aiplayerscores = origState.playerScores.slice();
 	var root = new Node(origState, speler4.playoutHand, null);
 	for (var i = 0; i < noIterations; i++) {
 		root.state = origState2;
 		root.state.cardsPlayed.allCards = aiallplayed.slice();
 		root.state.cardsPlayed.invertDeck = aiallinvert.slice();
 		root.state.currentRound = aicurrentround.slice();
-		root.state.playerScores = aiplayerscores.slice();
 		var expanded = treePolicy(root);
 //		console.log("iteration: " + i + " length:" + expanded.state.currentRound.length + " " + Hearts.cardstosymbols(expanded.currentHand));
 		var valueChange = assignReward(expanded);
@@ -80,6 +78,7 @@ function runMCTS(origState) {
 	return bestRewardChild(root);
 }
 function treePolicy(roNode) {
+	roNode.state.playerScores = [speler1.score, speler2.score, speler3.score, speler4.score];
 	var thisNode = roNode;
 	thisNode.currentHand = speler4.playoutHand;
 	while (thisNode.state.isGameValid() && expansionDepth > thisNode.depth && thisNode.currentHand.length > 0) {
