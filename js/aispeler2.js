@@ -66,9 +66,9 @@ function playoutGame(gameCopy, gameHand) {
 			var points = gameCopy.advance(removedcard[0], gameHand, 2);
 			totalpoints = totalpoints + points;
 		}
-		console.log("isGameValid: " + gameCopy.isGameValid() + " points: " + points + " length: " + gameCopy.cardsPlayed.allCards.length);
+//		console.log("isGameValid: " + gameCopy.isGameValid() + " points: " + points + " length: " + gameCopy.cardsPlayed.allCards.length);
 	}
-	console.log("playoutGame: " + totalpoints);
+//	console.log("playoutGame: " + totalpoints);
 	return totalpoints;
 }
 function selectai2card(mastercopy) {
