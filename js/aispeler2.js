@@ -48,10 +48,10 @@ function selectai2acard() {
 function playoutGame(gameCopy, gameHand) {
 	var totalpoints = 0;
 	while (gameCopy.isGameValid()) {
-		if (gameHand.length === 0) break;
 		var firstSuit2 = speler2.getFirstSuit(gameCopy.currentRound);
 		var range = speler2.getSuitRange(firstSuit2, gameHand);
 		if (range[0] === -1 && range[1] === -1) {
+			if (gameHand.length === 0) break;
 			var index = Math.floor(Math.random() * gameHand.length);
 			while (gameCopy.firstInRound() && !gameCopy.hasHeartsBroken && gameHand[index].suit === 3 && !Hearts.hasAllHearts(gameHand)) {
 				index = Math.floor(Math.random() * gameHand.length);
