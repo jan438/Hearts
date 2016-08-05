@@ -74,10 +74,6 @@ function playoutGame(gameCopy, gameHand) {
 function selectai2card(mastercopy) {
 	var maximum = speler2.cards.length;
 	var bestIndex = 0;
-	var aicardsplayed = mastercopy.cardsPlayed.allCards.slice();
-	var aiinvertdeck = mastercopy.cardsPlayed.invertDeck.slice();
-	var aicurrentround = mastercopy.currentRound.slice();
-	var aiplayerscores = mastercopy.playerScores.slice();
 	var hand2 = Hearts.cardstosymbols(speler2.cards);
 	if (mastercopy.firstMove()) {
 		var twoofclubs = hand2.indexOf("♣2");
@@ -150,10 +146,9 @@ function selectai2card(mastercopy) {
 			if (currenthand === 0 && gameHand[i].suit === 2 && gameHand[i].rank === 12)
 				break;
 			var gameCopy = new Hearts.state2(mastercopy);
-			gameCopy.cardsPlayed.allCards = aicardsplayed;
-			gameCopy.cardsPlayed.invertDeck = aiinvertdeck;
-			gameCopy.currentRound = aicurrentround;
-			gameCopy.playerScores = aiplayerscores;
+			gameCopy.cardsPlayed.allCards = ronde.cardsPlayed.slice();
+			gameCopy.cardsPlayed.invertDeck = fulldeck.diff(ronde.cardsPlayed);
+			gameCopy.playerScores = [speler1.score, speler2.score, speler3.score, speler4.score];
 			var removedcard = gameHand.splice(i, 1);
 			var score = gameCopy.advance(removedcard[0], gameHand, 2);
 			score = score + playoutGame(gameCopy, gameHand);
@@ -171,10 +166,9 @@ function selectai2card(mastercopy) {
 			if (currenthand === 0 && gameHand[i].suit === 2 && gameHand[i].rank === 12)
 				break;
 			var gameCopy = new Hearts.state2(mastercopy);
-			gameCopy.cardsPlayed.allCards = aicardsplayed;
-			gameCopy.cardsPlayed.invertDeck = aiinvertdeck;
-			gameCopy.currentRound = aicurrentround;
-			gameCopy.playerScores = aiplayerscores;
+			gameCopy.cardsPlayed.allCards = ronde.cardsPlayed.slice();
+			gameCopy.cardsPlayed.invertDeck = fulldeck.diff(ronde.cardsPlayed);
+			gameCopy.playerScores = [speler1.score, speler2.score, speler3.score, speler4.score];
 			var removedcard = gameHand.splice(i, 1);
 			var score = gameCopy.advance(removedcard[0], gameHand, 2);
 			score = score + playoutGame(gameCopy, gameHand);
