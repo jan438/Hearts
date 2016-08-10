@@ -82,7 +82,7 @@ function treePolicy(roNode) {
 	var thisNode = roNode;
 	thisNode.currentHand = speler4.playoutHand;
 	while (thisNode.state.isGameValid() && expansionDepth > thisNode.depth && thisNode.currentHand.length > 0) {
-		console.log("ThisNode state cardsPlayed size: " + thisNode.state.cardsPlayed.allCards.length);
+//		console.log("ThisNode state cardsPlayed size: " + thisNode.state.cardsPlayed.allCards.length);
 		var firstSuit2 = speler4.getFirstSuit(thisNode.state.currentRound); 
 		var range = speler4.getSuitRange(firstSuit2, thisNode.currentHand);
 		var firstIndex = range[0];
@@ -151,7 +151,7 @@ function assignReward(baseNode) {
 	var finalState = new Hearts.state2(baseNode.state);
 	var finalHand = baseNode.currentHand.slice();
 	while (finalState.isGameValid() && finalHand.length > 0) {
-		console.log("FinalState cardsPlayed size: " + finalState.cardsPlayed.allCards.length);
+//		console.log("FinalState cardsPlayed size: " + finalState.cardsPlayed.allCards.length);
 		var firstSuit2 = speler4.getFirstSuit(finalState.currentRound);
 		var range = speler4.getSuitRange(firstSuit2, finalHand);
 		if (firstSuit2 === " ") {
