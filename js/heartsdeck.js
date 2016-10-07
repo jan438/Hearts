@@ -1718,7 +1718,6 @@ var Deck = (function () {
 	speler4.cards = [];
         var sorted = _deck.cards;
         _deck.cards.forEach(function (card, i) {
-		strid;
 		card.disableDragging();
 		card.disableFlipping();
 		if (($.urlParam('stubmode') != null) && $.urlParam('stubmode')) {
