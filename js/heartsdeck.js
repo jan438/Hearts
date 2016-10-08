@@ -1716,7 +1716,6 @@ var Deck = (function () {
 	speler2.cards = [];
 	speler3.cards = [];
 	speler4.cards = [];
-        var sorted = _deck.cards;
         _deck.cards.forEach(function (card, i) {
 		card.disableDragging();
 		card.disableFlipping();
